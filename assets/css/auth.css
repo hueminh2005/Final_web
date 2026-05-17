@@ -1,0 +1,249 @@
+/* ===== AUTH PAGES - Split Screen Design ===== */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Sora', -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f2f5;
+}
+
+.auth-wrapper {
+    width: 900px;
+    max-width: 100vw;
+    min-height: 560px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===== PANEL TRÁI (màu) ===== */
+.auth-panel {
+    width: 40%;
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 40%, #075985 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-panel::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+    top: -80px;
+    right: -80px;
+}
+
+.auth-panel::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    bottom: -60px;
+    left: -60px;
+}
+
+.auth-panel-logo {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-panel h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    position: relative;
+    z-index: 1;
+    line-height: 1.3;
+}
+
+.auth-panel p {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+    line-height: 1.6;
+}
+
+.auth-panel-btn {
+    display: inline-block;
+    padding: 0.65rem 2rem;
+    border: 2px solid rgba(255,255,255,0.8);
+    border-radius: 999px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.auth-panel-btn:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: white;
+}
+
+/* ===== PANEL PHẢI (form) ===== */
+.auth-form-panel {
+    width: 60%;
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-form-panel h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.4rem;
+}
+
+.auth-subtitle {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+/* Form inputs */
+.input-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: #1e293b;
+    background: #f8fafc;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #0ea5e9;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(14,165,233,0.12);
+}
+
+.input-group input::placeholder { color: #cbd5e1; }
+
+.input-icon {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+.input-group small {
+    display: block;
+    color: #94a3b8;
+    font-size: 0.78rem;
+    margin-top: 0.3rem;
+    padding-left: 0.25rem;
+}
+
+/* Forgot password link */
+.forgot-link {
+    display: block;
+    text-align: right;
+    color: #0ea5e9;
+    font-size: 0.82rem;
+    text-decoration: none;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+.forgot-link:hover { text-decoration: underline; }
+
+/* Submit button */
+.btn-auth {
+    width: 100%;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+    letter-spacing: 0.02em;
+}
+
+.btn-auth:hover {
+    background: linear-gradient(135deg, #0284c7, #075985);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(14,165,233,0.35);
+}
+
+.btn-auth:active { transform: translateY(0); }
+
+/* Alert */
+.alert {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.alert-danger {
+    background: #fef2f2;
+    color: #991b1b;
+    border-left: 3px solid #ef4444;
+}
+
+.alert-success {
+    background: #f0fdf4;
+    color: #166534;
+    border-left: 3px solid #22c55e;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .auth-wrapper {
+        flex-direction: column;
+        border-radius: 0;
+        min-height: 100vh;
+    }
+    .auth-panel { width: 100%; padding: 2rem 1.5rem; min-height: 200px; }
+    .auth-form-panel { width: 100%; padding: 2rem 1.5rem; }
+    .auth-panel::before, .auth-panel::after { display: none; }
+}

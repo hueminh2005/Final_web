@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  web:
+    image: php:8.1-apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - ./apache.conf:/etc/apache2/sites-available/000-default.conf
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    depends_on:
+      - db
+    networks:
+      - noteapp
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: note_management_db
+      MYSQL_USER: noteapp
+      MYSQL_PASSWORD: noteapp123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - noteapp
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: db
+      PMA_USER: noteapp
+      PMA_PASSWORD: noteapp123
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    networks:
+      - noteapp
+
+volumes:
+  mysql_data:
+
+networks:
+  noteapp:
+    driver: bridge
