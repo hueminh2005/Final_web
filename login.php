@@ -69,9 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                            value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
                 </div>
 
-                <div class="input-group">
+                <div class="input-group password-field">
                     <span class="input-icon">🔒</span>
-                    <input type="password" name="password" placeholder="Password" required>
+                    <input id="passwordInput" type="password" name="password" placeholder="Password" required>
+                    <button type="button" class="password-toggle" id="togglePassword" aria-label="Show password">👁️</button>
                 </div>
 
                 <a href="forgot-password.php" class="forgot-link">Forgot password?</a>
@@ -79,6 +80,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn-auth">LOGIN</button>
             </form>
         </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('passwordInput');
+
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', function() {
+                    const isPassword = passwordInput.getAttribute('type') === 'password';
+                    passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+                    this.textContent = isPassword ? '🙈' : '👁️';
+                    this.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
 
     </div>
 </body>

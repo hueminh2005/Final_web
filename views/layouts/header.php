@@ -31,7 +31,10 @@ function toggleTheme() {
                 <span id="themeIcon"><?= $theme === 'dark' ? '☀️' : '🌙' ?></span>
             </button>
             <a href="<?= APP_URL ?>/profile.php" class="btn-icon" title="Profile">👤</a>
-            <a href="<?= APP_URL ?>/logout.php" class="btn-icon" title="Logout">🚪</a>
+            <a href="<?= APP_URL ?>/logout.php" class="btn-icon btn-logout" title="Logout" id="logoutBtn">
+                <span class="logout-icon">🚪</span>
+                <span class="logout-text">Logout</span>
+            </a>
         </div>
     </div>
 </header>

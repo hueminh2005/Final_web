@@ -149,6 +149,48 @@ body {
     outline: none;
 }
 
+.password-field input {
+    padding-right: 3.5rem;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.9rem;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    font-size: 1.05rem;
+    cursor: pointer;
+    color: #64748b;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.password-toggle:hover {
+    color: #0ea5e9;
+    background: rgba(14,165,233,0.12);
+}
+
+.btn-logout {
+    gap: 0.4rem;
+    padding: 0.45rem 0.75rem;
+    min-width: auto;
+    width: auto;
+}
+
+.logout-text {
+    display: none;
+    font-size: 0.95rem;
+}
+
+@media (min-width: 900px) {
+    .logout-text {
+        display: inline;
+    }
+}
+
 .input-group input:focus {
     border-color: #0ea5e9;
     background: #fff;

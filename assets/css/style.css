@@ -147,6 +147,32 @@ body {
     color: var(--text);
 }
 
+.btn-logout {
+    gap: 0.4rem;
+    padding: 0.45rem 0.75rem;
+    width: auto;
+    min-width: auto;
+    background: rgba(239, 68, 68, 0.08);
+    color: var(--danger);
+}
+
+.btn-logout:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+}
+
+.logout-text {
+    display: none;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+    .logout-text {
+        display: inline;
+    }
+}
+
 /* ===== LAYOUT ===== */
 .main-container {
     display: grid;
