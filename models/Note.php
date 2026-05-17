@@ -13,17 +13,18 @@ class Note {
     /**
      * Create a new note
      */
-    public function create($userId, $title, $content) {
+    public function create($userId, $title, $content, $noteColor = '#ffffff') {
         try {
             $stmt = $this->pdo->prepare('
-                INSERT INTO notes (user_id, title, content)
-                VALUES (:user_id, :title, :content)
+                INSERT INTO notes (user_id, title, content, note_color)
+                VALUES (:user_id, :title, :content, :note_color)
             ');
             
             $result = $stmt->execute([
                 ':user_id' => $userId,
                 ':title' => $title,
-                ':content' => $content
+                ':content' => $content,
+                ':note_color' => $noteColor
             ]);
             
             return $result ? $this->pdo->lastInsertId() : false;
@@ -35,17 +36,18 @@ class Note {
     /**
      * Update note
      */
-    public function update($noteId, $userId, $title, $content) {
+    public function update($noteId, $userId, $title, $content, $noteColor = '#ffffff') {
         try {
             $stmt = $this->pdo->prepare('
                 UPDATE notes 
-                SET title = :title, content = :content, updated_at = NOW()
+                SET title = :title, content = :content, note_color = :note_color, updated_at = NOW()
                 WHERE id = :id AND user_id = :user_id
             ');
             
             return $stmt->execute([
                 ':title' => $title,
                 ':content' => $content,
+                ':note_color' => $noteColor,
                 ':id' => $noteId,
                 ':user_id' => $userId
             ]);

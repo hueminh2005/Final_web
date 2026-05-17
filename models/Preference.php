@@ -36,7 +36,8 @@ class Preference {
             'font_size' => 14,
             'theme' => 'light',
             'default_view' => 'grid',
-            'notes_per_page' => 20
+            'notes_per_page' => 20,
+            'default_note_color' => '#ffffff'
         ];
     }
     
@@ -50,7 +51,8 @@ class Preference {
                 SET font_size = :font_size,
                     theme = :theme,
                     default_view = :default_view,
-                    notes_per_page = :notes_per_page
+                    notes_per_page = :notes_per_page,
+                    default_note_color = :default_note_color
                 WHERE user_id = :user_id
             ');
             
@@ -59,6 +61,7 @@ class Preference {
                 ':theme' => $preferences['theme'] ?? 'light',
                 ':default_view' => $preferences['default_view'] ?? 'grid',
                 ':notes_per_page' => $preferences['notes_per_page'] ?? 20,
+                ':default_note_color' => $preferences['default_note_color'] ?? '#ffffff',
                 ':user_id' => $userId
             ]);
         } catch (Exception $e) {

@@ -30,7 +30,14 @@ function toggleTheme() {
             <button id="themeToggle" class="btn-icon" title="Toggle Theme" onclick="toggleTheme()">
                 <span id="themeIcon"><?= $theme === 'dark' ? '☀️' : '🌙' ?></span>
             </button>
-            <a href="<?= APP_URL ?>/profile.php" class="btn-icon" title="Profile">👤</a>
+            <a href="<?= APP_URL ?>/profile.php" class="user-badge" title="Profile">
+                <?php if (!empty($_SESSION['user_avatar'])): ?>
+                    <img src="<?= htmlspecialchars($_SESSION['user_avatar']); ?>" alt="Avatar" class="user-avatar-sm">
+                <?php else: ?>
+                    <span class="user-avatar-sm user-avatar-fallback"><?= htmlspecialchars(mb_substr($_SESSION['user_name'] ?? 'U', 0, 1)); ?></span>
+                <?php endif; ?>
+                <span class="user-name"><?= htmlspecialchars($_SESSION['user_name'] ?? 'User'); ?></span>
+            </a>
             <a href="<?= APP_URL ?>/logout.php" class="btn-icon btn-logout" title="Logout" id="logoutBtn">
                 <span class="logout-icon">🚪</span>
                 <span class="logout-text">Logout</span>

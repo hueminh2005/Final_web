@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $result['user']['id'];
             $_SESSION['user_email'] = $result['user']['email'];
             $_SESSION['user_name'] = $result['user']['display_name'];
+            $_SESSION['user_avatar'] = $result['user']['avatar'] ?? '';
             header('Location: ' . APP_URL . '/index.php');
             exit;
         } else {

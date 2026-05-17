@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $title = trim($_POST['title'] ?? '');
 $content = trim($_POST['content'] ?? '');
+$noteColor = $_POST['note_color'] ?? '#ffffff';
 
 if (!$title || !$content) {
     http_response_code(400);
@@ -26,7 +27,7 @@ if (!$title || !$content) {
 
 try {
     $noteModel = new Note($pdo);
-    $noteId = $noteModel->create($_SESSION['user_id'], $title, $content);
+    $noteId = $noteModel->create($_SESSION['user_id'], $title, $content, $noteColor);
 
     if ($noteId) {
         echo json_encode(['success' => true, 'note_id' => $noteId]);

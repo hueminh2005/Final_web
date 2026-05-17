@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $noteId = $_POST['note_id'] ?? null;
 $title = $_POST['title'] ?? '';
 $content = $_POST['content'] ?? '';
+$noteColor = $_POST['note_color'] ?? '#ffffff';
 
 if (!$noteId || !$title || !$content) {
     http_response_code(400);
@@ -31,7 +32,7 @@ if (!$noteId || !$title || !$content) {
 
 try {
     $noteModel = new Note($pdo);
-    $result = $noteModel->update($noteId, $_SESSION['user_id'], $title, $content);
+    $result = $noteModel->update($noteId, $_SESSION['user_id'], $title, $content, $noteColor);
     
     if ($result) {
         echo json_encode([

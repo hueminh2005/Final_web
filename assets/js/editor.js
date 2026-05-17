@@ -25,6 +25,8 @@ class NoteEditor {
         const saveBtn = document.getElementById('saveBtn');
         const deleteBtn = document.getElementById('deleteBtn');
         const passwordProtect = document.getElementById('passwordProtect');
+        const noteColor = document.getElementById('noteColor');
+        const noteColorPreview = document.getElementById('noteColorPreview');
 
         const imageInput = document.getElementById('imageInput');
 
@@ -37,6 +39,20 @@ class NoteEditor {
             passwordProtect.addEventListener('change', () => {
                 const options = document.getElementById('passwordProtectOptions');
                 if (options) options.style.display = passwordProtect.checked ? 'block' : 'none';
+            });
+        }
+        if (noteColor) {
+            noteColor.addEventListener('change', () => {
+                if (noteColorPreview) {
+                    noteColorPreview.style.backgroundColor = noteColor.value;
+                }
+                const editor = document.getElementById('editor');
+                if (editor) {
+                    editor.style.backgroundColor = noteColor.value;
+                }
+                this.isDirty = true;
+                this.updateSaveStatus('unsaved');
+                this.autoSave();
             });
         }
 
@@ -74,6 +90,11 @@ class NoteEditor {
             const formData = new FormData();
             formData.append('title', title);
             formData.append('content', content);
+            
+            const noteColor = document.getElementById('noteColor');
+            if (noteColor) {
+                formData.append('note_color', noteColor.value);
+            }
 
             let url;
             if (this.noteId) {

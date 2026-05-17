@@ -16,6 +16,7 @@ require_once __DIR__ . '/config/database.php';
 require_once __DIR__ . '/models/User.php';
 require_once __DIR__ . '/models/Note.php';
 require_once __DIR__ . '/models/Label.php';
+require_once __DIR__ . '/models/Preference.php';
 
 $userModel = new User($pdo);
 $currentUser = $userModel->getUserById($_SESSION['user_id']);
@@ -28,9 +29,12 @@ if (!$currentUser) {
 $noteId = $_GET['id'] ?? null;
 $noteModel = new Note($pdo);
 $labelModel = new Label($pdo);
+$preferenceModel = new Preference($pdo);
+$userPreferences = $preferenceModel->getPreferences($_SESSION['user_id']);
 
 $note = null;
 $noteLabels = [];
+$noteColor = $userPreferences['default_note_color'] ?? '#ffffff';
 
 if ($noteId) {
     $note = $noteModel->getNoteById($noteId, $_SESSION['user_id']);
@@ -39,6 +43,7 @@ if ($noteId) {
         exit;
     }
     $noteLabels = $labelModel->getNotesLabels($noteId);
+    $noteColor = $note['note_color'] ?? '#ffffff';
 }
 
 $allLabels = $labelModel->getUserLabels($_SESSION['user_id']);
@@ -86,7 +91,8 @@ $allLabels = $labelModel->getUserLabels($_SESSION['user_id']);
                 <input id="imageInput" type="file" accept="image/*" style="display:none">
             </div>
             
-            <div id="editor" class="rich-editor" contenteditable="true"><?= $note ? $note['content'] : ''; ?></div>
+            <div id="editor" class="rich-editor" contenteditable="true" 
+                 style="background-color: <?= htmlspecialchars($noteColor); ?>;"><?= $note ? $note['content'] : ''; ?></div>
             <input type="hidden" id="noteContent" name="content">
             
             <div class="editor-sidebar">
@@ -116,6 +122,16 @@ $allLabels = $labelModel->getUserLabels($_SESSION['user_id']);
                     <div id="passwordProtectOptions" style="display: none;">
                         <input type="password" id="notePassword" placeholder="Set password">
                         <input type="password" id="notePasswordConfirm" placeholder="Confirm password">
+                    </div>
+                    
+                    <div style="margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+                        <label for="noteColor">Note Color</label>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                            <input type="color" id="noteColor" value="<?= htmlspecialchars($noteColor); ?>" 
+                                   style="width: 50px; height: 36px; border: 1px solid var(--border); border-radius: 4px; cursor: pointer;">
+                            <div id="noteColorPreview" style="width: 50px; height: 36px; border-radius: 4px; border: 2px solid var(--border);
+                                   background-color: <?= htmlspecialchars($noteColor); ?>;" title="Color preview"></div>
+                        </div>
                     </div>
                 </div>
             </div>
