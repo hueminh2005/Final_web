@@ -19,8 +19,25 @@ class NoteManager {
     setupEventListeners() {
         // Search
         const searchInput = document.getElementById('searchInput');
+        const searchClear = document.getElementById('searchClear');
         if (searchInput) {
-            searchInput.addEventListener('input', this.debounce((e) => this.search(e.target.value), 300));
+            searchInput.addEventListener('input', this.debounce((e) => {
+                const query = e.target.value.trim();
+                if (searchClear) {
+                    searchClear.style.display = query ? 'block' : 'none';
+                }
+                this.search(query);
+            }, 200));
+        }
+        if (searchClear) {
+            searchClear.addEventListener('click', () => {
+                if (searchInput) {
+                    searchInput.value = '';
+                    searchClear.style.display = 'none';
+                    this.search('');
+                    searchInput.focus();
+                }
+            });
         }
         
         // View toggle
@@ -61,11 +78,23 @@ class NoteManager {
     
     async search(query) {
         try {
-            const response = await fetch(`/ajax/search-note.php?q=${encodeURIComponent(query)}`);
+            const response = await fetch(`ajax/search-note.php?q=${encodeURIComponent(query)}`, {
+                method: 'GET',
+                cache: 'no-store',
+                headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+            });
+
+            if (response.status === 401) {
+                // Not authorized (session expired) — redirect to login
+                window.location.href = '/login.php';
+                return;
+            }
+
             const data = await response.json();
-            
-            if (data.success) {
+            if (data && data.success) {
                 this.displayNotes(data.notes);
+            } else {
+                this.displayNotes([]);
             }
         } catch (error) {
             console.error('Search error:', error);
@@ -135,14 +164,16 @@ class NoteManager {
             formData.append('note_id', noteId);
             formData.append('is_pinned', isPinned ? 1 : 0);
             
-            const response = await fetch('/ajax/pin-note.php', {
+            const response = await fetch('ajax/pin-note.php', {
                 method: 'POST',
                 body: formData
             });
             
             const data = await response.json();
             if (data.success) {
-                location.reload();
+                const searchInput = document.getElementById('searchInput');
+                const query = searchInput ? searchInput.value.trim() : '';
+                this.search(query);
             }
         } catch (error) {
             console.error('Pin error:', error);
@@ -156,7 +187,7 @@ class NoteManager {
             const formData = new FormData();
             formData.append('note_id', noteId);
             
-            const response = await fetch('/ajax/delete-note.php', {
+            const response = await fetch('ajax/delete-note.php', {
                 method: 'POST',
                 body: formData
             });

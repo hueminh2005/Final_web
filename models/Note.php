@@ -173,13 +173,14 @@ class Note {
             
             $stmt = $this->pdo->prepare('
                 SELECT * FROM notes 
-                WHERE user_id = :user_id AND (title LIKE :query OR content LIKE :query)
+                WHERE user_id = :user_id AND (title LIKE :query_title OR content LIKE :query_content)
                 ORDER BY is_pinned DESC, created_at DESC
                 LIMIT :limit OFFSET :offset
             ');
             
             $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
-            $stmt->bindValue(':query', $searchQuery, PDO::PARAM_STR);
+            $stmt->bindValue(':query_title', $searchQuery, PDO::PARAM_STR);
+            $stmt->bindValue(':query_content', $searchQuery, PDO::PARAM_STR);
             $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
             $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();

@@ -1,0 +1,22 @@
+--- search debug log ---
+[2026-05-18 16:41:56] REQUEST: method=GET q= remote=::1 session_user=2
+[2026-05-18 16:41:58] REQUEST: method=GET q= remote=::1 session_user=2
+[2026-05-18 16:42:20] REQUEST: method=GET q= remote=::1 session_user=2
+[2026-05-18 16:42:30] REQUEST: method=GET q= remote=::1 session_user=2
+[2026-05-18 16:42:31] REQUEST: method=GET q= remote=::1 session_user=2
+[2026-05-18 16:42:31] REQUEST: method=GET q= remote=::1 session_user=2
+[2026-05-18 16:42:33] REQUEST: method=GET q= remote=::1 session_user=2
+[2026-05-18 16:42:38] REQUEST: method=GET q= remote=::1 session_user=2
+[2026-05-18 16:42:39] REQUEST: method=GET q= remote=::1 session_user=2
+[2026-05-18 16:44:05] REQUEST: method=GET uri=/note-management/ajax/search-note.php?q=mai query_string=q=mai q=mai remote=::1 session_user=2 x_requested_with=XMLHttpRequest
+[2026-05-18 16:44:05] RESULT: q=mai count=0 labels_added=no
+[2026-05-18 16:44:06] REQUEST: method=GET uri=/note-management/ajax/search-note.php?q=mai1 query_string=q=mai1 q=mai1 remote=::1 session_user=2 x_requested_with=XMLHttpRequest
+[2026-05-18 16:44:06] RESULT: q=mai1 count=0 labels_added=no
+[2026-05-18 16:44:06] REQUEST: method=GET uri=/note-management/ajax/search-note.php?q=mai19 query_string=q=mai19 q=mai19 remote=::1 session_user=2 x_requested_with=XMLHttpRequest
+[2026-05-18 16:44:06] RESULT: q=mai19 count=0 labels_added=no
+[2026-05-18 16:44:23] REQUEST: method=GET uri=/note-management/ajax/search-note.php?q=mai query_string=q=mai q=mai remote=::1 session_user=2 x_requested_with=none
+[2026-05-18 16:44:23] RESULT: q=mai count=0 labels_added=no
+[2026-05-18 16:44:23] REQUEST: method=GET uri=/note-management/ajax/search-note.php?q=mai19 query_string=q=mai19 q=mai19 remote=::1 session_user=2 x_requested_with=none
+[2026-05-18 16:44:23] RESULT: q=mai19 count=0 labels_added=no
+[2026-05-18 16:44:24] REQUEST: method=GET uri=/note-management/ajax/search-note.php?q=mai19t5 query_string=q=mai19t5 q=mai19t5 remote=::1 session_user=2 x_requested_with=none
+[2026-05-18 16:44:24] RESULT: q=mai19t5 count=0 labels_added=no

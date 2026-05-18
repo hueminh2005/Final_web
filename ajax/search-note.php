@@ -24,11 +24,6 @@ $query = $_GET['q'] ?? '';
 $page = $_GET['page'] ?? 1;
 $labelFilter = $_GET['label_id'] ?? null;
 
-if (strlen($query) < 2 && !$labelFilter) {
-    echo json_encode(['notes' => []]);
-    exit;
-}
-
 try {
     $noteModel = new Note($pdo);
     $labelModel = new Label($pdo);
